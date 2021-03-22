@@ -1,8 +1,19 @@
-import React, { Component } from 'react';
-import './App.css';
-import axios from 'axios'
+import React from 'react';
+import {
+  ChakraProvider,
+  Box,
+  Text,
+  Link,
+  VStack,
+  Code,
+  Grid,
+  theme,
+} from '@chakra-ui/react';
+import { ColorModeSwitcher } from './ColorModeSwitcher';
+import { Logo } from './Logo';
+import axios from 'axios';
 
-class App extends Component {
+class App extends React.Component {
   state = {
     response: {}
   };
@@ -13,15 +24,26 @@ class App extends Component {
       this.setState({response});
     });
   }
-
   render() {
     return (
-      <div className="App">
-        <h1>Hello from the frontend!</h1>
-        <h1>{this.state.response.body}</h1>
-      </div>
+      <ChakraProvider theme={theme}>
+        <Box textAlign="center" fontSize="xl">
+          <Grid minH="100vh" p={3}>
+            <ColorModeSwitcher justifySelf="flex-end" />
+            <VStack spacing={8}>
+              <Text>
+                Hello from frontend!
+              </Text>
+              <Text>
+                {this.state.response.body}
+              </Text>
+            </VStack>
+          </Grid>
+        </Box>
+      </ChakraProvider>
     );
   }
+  
 }
 
 export default App;
